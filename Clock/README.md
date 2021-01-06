@@ -1,6 +1,6 @@
 User Guide:
 - Use a timer or systick timer for this driver.
-- If you use a timer, timer frequency is equire to your frequency options.(ref: CLK_TickFreq) 
+- If you use a timer, timer frequency must be equire to module's frequency options.(ref: CLK_TickFreq) 
 - Add increment function in timer interrupt function (CLK_Inc()).
 
 CLK_TickFreq:
