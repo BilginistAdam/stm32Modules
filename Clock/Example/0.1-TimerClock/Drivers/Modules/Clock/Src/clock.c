@@ -2,7 +2,8 @@
  * clock.c
  *
  *  Created on: 5 Oca 2021
- *      Author: bilgi
+ *      Author: bilginist
+ *	E-Main: bilginenesismail@gmail.com
  */
 
 /* Includes *************************************/
