@@ -1,1 +1,0 @@
-Example For L298N Motor Driver on Nucleo-F303RE(STM32F303RE).
