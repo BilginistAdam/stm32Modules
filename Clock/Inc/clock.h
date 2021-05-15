@@ -20,7 +20,7 @@
 #include "main.h"
 
 /* Defines **************************************/
-
+#define CLK_TIM_MAX_VALUE 0xFFFFFFFFU
 
 /* TypeDefs *************************************/
 
@@ -30,27 +30,42 @@ typedef enum{
 }CLK_Status_t;
 
 typedef enum{
-  CLK_RESET 	= 0U,
-  CLK_SET 		= !CLK_RESET
+	  CLK_RESET 	= 0U,
+	  CLK_SET 		= !CLK_RESET
 }CLK_FlagStatus_t;
 
 typedef enum{
-  CLK_TICK_FREQ_10HZ		= 100U,
-  CLK_TICK_FREQ_100HZ		= 10U,
-  CLK_TICK_FREQ_1KHZ		= 1U,
-  CLK_TICK_FREQ_DEFAULT		= CLK_TICK_FREQ_1KHZ
+	CLK_TICK_FREQ_1HZ		= 1000000U,
+	CLK_TICK_FREQ_10HZ		= 100000U,
+	CLK_TICK_FREQ_100HZ		= 10000U,
+	CLK_TICK_FREQ_1KHZ		= 1000U,
+	CLK_TICK_FREQ_10KHZ		= 100U,
+	CLK_TICK_FREQ_100KHZ	= 10U,
+	CLK_TICK_FREQ_1MHZ		= 1U,
+	CLK_TICK_FREQ_DEFAULT	= CLK_TICK_FREQ_1KHZ
 }CLK_TickFreq_t;
 
 typedef struct{
-	CLK_TickFreq_t	Freq;		/* It holds counter freq. */
+	CLK_TickFreq_t 				Freq;
+	TIM_HandleTypeDef 		* 	htim;
+}CLK_Config_t;
+
+typedef struct{
+	CLK_Config_t	Config;		/* It holds the Config of the Clock. */
 	uint32_t 		Time;		/* It holds time data. */
 }CLK_Handler_t;
 
 /* Define Functions Prototype *******************/
-CLK_Status_t CLK_Init(CLK_Handler_t* Clcok, CLK_TickFreq_t TickFreq);
-void CLK_Inc(CLK_Handler_t * Clock);
-uint32_t CLK_Now(CLK_Handler_t * Clock);
-uint32_t CLK_ElapsedTime(uint32_t StartTime, uint32_t Now);
+// Init
+CLK_Status_t CLK_Init(CLK_Handler_t* hclk);
 
+// GET
+uint32_t CLK_getTime(CLK_Handler_t * hclk);
+
+// Calculator
+uint32_t CLK_calElapsedTime(uint32_t StartTime, uint32_t Now);
+
+// IT Handler
+void CLK_incTick(CLK_Handler_t * hclk, TIM_HandleTypeDef * htim);
 
 #endif /* _CLOCK_H_ */
